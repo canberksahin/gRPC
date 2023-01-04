@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+option java_package = "com.sm704.gRPC";
+
+service country{
+    rpc GetCountry(GetCountryRequest)  returns (getCountryResponse);
+    rpc GetCountryPopulation(GetCountryPopulationRequest)  returns (getCountryPopulationResponse);
+}
+
+message GetCountryRequest{
+       string name = 1 ;
+}
+
+message getCountryResponse{
+	Country country = 1;
+}
+
+enum Currency {
+	  GBP = 0;
+      EUR = 1;
+      PLN = 2;
+}
+
+
+message Country {
+	  string name = 1;
+      int32  population  = 2;
+      string capital = 3;
+      Currency  currency  = 4;
+}
+
+
+message GetCountryPopulationRequest{
+       string name = 1 ;
+}
+
+message getCountryPopulationResponse {
+	   int32  population  = 2;
+}

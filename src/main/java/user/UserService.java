@@ -1,34 +1,40 @@
 package user;
 
-import com.sm704.gRPC.User.APIResponse;
-import com.sm704.gRPC.User.Empty;
-import com.sm704.gRPC.User.LoginRequest;
-import com.sm704.gRPC.userGrpc.userImplBase;
+import com.sm704.gRPC.CountryOuterClass.Country;
+import com.sm704.gRPC.CountryOuterClass.Currency;
+import com.sm704.gRPC.CountryOuterClass.GetCountryRequest;
+import com.sm704.gRPC.CountryOuterClass.getCountryResponse;
+import com.sm704.gRPC.countryGrpc.countryImplBase;
+import com.sm704.gRPC.CountryOuterClass.GetCountryPopulationRequest;
+import com.sm704.gRPC.CountryOuterClass.getCountryPopulationResponse;
 
 import io.grpc.stub.StreamObserver;
 
-public class UserService extends userImplBase{
+public class UserService extends countryImplBase {
 
 	@Override
-	public void login(LoginRequest request, StreamObserver<APIResponse> responseObserver) {
+	public void getCountry(GetCountryRequest request, StreamObserver<getCountryResponse> responseObserver) {
 		
-		System.out.println("Inside login");
+		System.out.println("Inside GetCountry Method");
+		String countryName = request.getName();
 		
-		String username = request.getUsername();
-		String password = request.getPassword();
+		getCountryResponse.Builder response = getCountryResponse.newBuilder();
+		Country country = new Country();
+		switch(countryName) {
 		
-		APIResponse.Builder response = APIResponse.newBuilder();
-		if(username.equals(password)) {
-			
-			 // return success message
-			
-			response.setResponseCode(0).setResponsemessage("SUCCESS");
-			
+		  case "Spain":
+			  
+			  response.setCountry(Country.newBuilder().setCapital("Madrid").setCurrency(Currency.EUR).setPopulation(46704314).setName("Spain"));
+		    break;
+		  case "Poland":
+			  response.setCountry(Country.newBuilder().setCapital("Warsaw").setCurrency(Currency.PLN).setPopulation(46704314).setName("38186860"));
+		    break;
+		  case "United Kingdom":
+			  response.setCountry(Country.newBuilder().setCapital("London").setCurrency(Currency.GBP).setPopulation(46704314).setName("United Kingdom"));
+			    break;
+		  default:
+		    // code block
 		}
-		else {
-			response.setResponseCode(100).setResponsemessage("INVALID PASSWORD");
-		}
-		
 		
 		
 		responseObserver.onNext(response.build());
@@ -36,10 +42,11 @@ public class UserService extends userImplBase{
 	}
 
 	@Override
-	public void logout(Empty request, StreamObserver<APIResponse> responseObserver) {
-		
+	public void getCountryPopulation(GetCountryPopulationRequest request,
+			StreamObserver<getCountryPopulationResponse> responseObserver) {
+		// TODO Auto-generated method stub
+		super.getCountryPopulation(request, responseObserver);
 	}
 
 	
-	 
 }
