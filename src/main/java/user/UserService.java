@@ -24,13 +24,13 @@ public class UserService extends countryImplBase {
 		
 		  case "Spain":
 			  
-			  response.setCountry(Country.newBuilder().setCapital("Madrid").setCurrency(Currency.EUR).setPopulation(46704314).setName("Spain"));
+			  response.setCountry(Country.newBuilder().setCapital("Madrid").setCurrency(Currency.EUR).setPopulation(678578532).setName("Spain"));
 		    break;
 		  case "Poland":
-			  response.setCountry(Country.newBuilder().setCapital("Warsaw").setCurrency(Currency.PLN).setPopulation(46704314).setName("38186860"));
+			  response.setCountry(Country.newBuilder().setCapital("Warsaw").setCurrency(Currency.PLN).setPopulation(243524352).setName("38186860"));
 		    break;
 		  case "United Kingdom":
-			  response.setCountry(Country.newBuilder().setCapital("London").setCurrency(Currency.GBP).setPopulation(46704314).setName("United Kingdom"));
+			  response.setCountry(Country.newBuilder().setCapital("London").setCurrency(Currency.GBP).setPopulation(57597859).setName("United Kingdom"));
 			    break;
 		  default:
 		    // code block
@@ -44,8 +44,29 @@ public class UserService extends countryImplBase {
 	@Override
 	public void getCountryPopulation(GetCountryPopulationRequest request,
 			StreamObserver<getCountryPopulationResponse> responseObserver) {
-		// TODO Auto-generated method stub
-		super.getCountryPopulation(request, responseObserver);
+		
+		System.out.println("Inside getCountryPopulation Method");
+		String countryName = request.getName();
+		
+		getCountryPopulationResponse.Builder response = getCountryPopulationResponse.newBuilder();
+		switch(countryName) {
+		
+		  case "Spain":
+			  response.setPopulation(678578532);
+		    break;
+		  case "Poland":
+			  response.setPopulation(243524352);
+		    break;
+		  case "United Kingdom":
+			  response.setPopulation(57597859);
+			    break;
+		  default:
+		    // code block
+		}
+		
+		
+		responseObserver.onNext(response.build());
+		responseObserver.onCompleted();
 	}
 
 	
