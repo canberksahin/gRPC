@@ -2,9 +2,9 @@ package com.sm704.gRPC.server;
 
 import java.io.IOException;
 
+import countryService.CountryService;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
-import user.UserService;
 
 public class GrpcServer {
 
@@ -13,7 +13,7 @@ public class GrpcServer {
 		 System.out.println("starting GRPC Server");
 		 Server server = ServerBuilder.forPort(9090).addService(
 
-				 new UserService()).build();
+				 new CountryService()).build();
 		 
 		 server.start();
 		 System.out.println("server started at "+ server.getPort());

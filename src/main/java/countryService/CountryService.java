@@ -1,4 +1,4 @@
-package user;
+package countryService;
 
 import com.sm704.gRPC.CountryOuterClass.Country;
 import com.sm704.gRPC.CountryOuterClass.Currency;
@@ -10,7 +10,7 @@ import com.sm704.gRPC.CountryOuterClass.getCountryPopulationResponse;
 
 import io.grpc.stub.StreamObserver;
 
-public class UserService extends countryImplBase {
+public class CountryService extends countryImplBase {
 
 	@Override
 	public void getCountry(GetCountryRequest request, StreamObserver<getCountryResponse> responseObserver) {
